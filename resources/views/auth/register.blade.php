@@ -20,6 +20,11 @@
             </div>
 
             <div class="mt-4">
+                <x-jet-label for="phone" value="{{ __('Phone Number') }}" />
+                <x-jet-input id="phone" class="block mt-1 w-full" type="number" name="phone" :value="old('phone')" required />
+            </div>
+
+            <div class="mt-4">
                 <x-jet-label for="password" value="{{ __('Password') }}" />
                 <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
             </div>
@@ -66,7 +71,12 @@
             const inputElement = document.querySelector('input[id="avatar"]');
             const pond = FilePond.create( inputElement );
             FilePond.setOptions({
-                server: '/upload'
+                server: {
+                    url: '/upload',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                }
             });
         </script>
     @endsection

@@ -26,6 +26,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'phone_number',
         'password',
     ];
 
@@ -58,4 +59,9 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function routeNotificationForNexmo($notification)
+    {
+        return $this->phone_number;
+    }
 }
